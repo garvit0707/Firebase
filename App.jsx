@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import {View,Text,PermissionsAndroid, Alert,Platform} from "react-native";
 import messaging from "@react-native-firebase/messaging"
+import FireBase from './src/FireBase';
+import Navigation from './src/Navigator/Navigation';
 
 const App = () => {
   const requestUserPermission = async () => {
@@ -37,11 +39,11 @@ useEffect(() => {
 }, []);
 
   return (
-    <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
-      <Text>
-        Push Notifications
-      </Text>
-    </View>
+    // <View style={{justifyContent:"center",alignItems:"center",flex:1,borderWidth:10,borderColor:"pink"}}>
+        <Navigation/>
+        // {/* <Text>helllo</Text> */}
+      // </View>
+    // </Navigation>
   )
 }
 
