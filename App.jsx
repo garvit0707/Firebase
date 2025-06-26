@@ -28,13 +28,13 @@ useEffect(() => {
 }, []);
 
 
-//   useEffect(() => {
-//   const unsubscribe = messaging().onMessage(async remoteMessage => {
-//     Alert.alert('New Notification', JSON.stringify(remoteMessage.notification));
-//   });
+  useEffect(() => {
+  const unsubscribe = messaging().onMessage(async remoteMessage => {
+    Alert.alert('New Notification', JSON.stringify(remoteMessage.notification));
+  });
 
-//   return unsubscribe;
-// }, []);
+  return unsubscribe;
+}, []);
 
   return (
     <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
