@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen from '../SignUpScreen';
 import LoginScreen from '../LoginScreen';
 import FireBase from '../FireBase';
+import HomeDashboardScreen from '../HomeDashboardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,7 @@ const Navigation = () => {
     <NavigationContainer>
         <Stack.Navigator initialRouteName='firebase'>
             <Stack.Screen name = "firebase" component={FireBase}/>
+            <Stack.Screen name = "homedashboard" component={HomeDashboardScreen}/>
             <Stack.Screen name = "login" component={LoginScreen}/>
             <Stack.Screen name='signup' component={SignUpScreen}/>
         </Stack.Navigator>
