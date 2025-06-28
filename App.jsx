@@ -3,6 +3,7 @@ import {View,Text,PermissionsAndroid, Alert,Platform} from "react-native";
 import messaging from "@react-native-firebase/messaging"
 import FireBase from './src/FireBase';
 import Navigation from './src/Navigator/Navigation';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 const App = () => {
   const requestUserPermission = async () => {
@@ -35,12 +36,14 @@ useEffect(() => {
     Alert.alert('New Notification', JSON.stringify(remoteMessage.notification));
   });
 
-  return unsubscribe;
+  return unsubscribe; 
 }, []);
 
   return (
     // <View style={{justifyContent:"center",alignItems:"center",flex:1,borderWidth:10,borderColor:"pink"}}>
-        <Navigation/>
+    <RootSiblingParent>
+      <Navigation/>
+    </RootSiblingParent>
         // {/* <Text>helllo</Text> */}
       // </View>
     // </Navigation>
