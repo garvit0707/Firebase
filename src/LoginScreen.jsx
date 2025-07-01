@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth';
 import { SuccessToast,ErrorToast, WarningToast } from './utils/Toast';
+import { EventLog } from './Eventlog/EventLog';
 
 
 const LoginScreen = () => {
@@ -20,6 +21,15 @@ const LoginScreen = () => {
   
   console.log("the user login value is here!!!",userdetail)
   const handleLogin=()=>{
+    try{
+      EventLog({
+        eventName: "loginScreen",
+        payload: {name: "garvitsharma",loginid: "2",loginemail: "garvit.sharma.0707@gmail.com"}
+      })
+    }
+    catch(error){
+      console.log("error caught:",error)
+    }
     signInWithEmailAndPassword(getAuth(), email, Password)
       .then((Response) => {
         console.log('Congrats you signed in!',(Response?.user?.providerData));
