@@ -3,7 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity,Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PhoneSignIn from './PhoneSignIn';
 import { EventLog } from './Eventlog/EventLog';
+import  crashlytics  from '@react-native-firebase/crashlytics';
 
+// crashlytics().crash();
 const FireBase = () => {
   const navigation = useNavigation();
   useEffect(() => {
@@ -14,7 +16,7 @@ const FireBase = () => {
     try {
       EventLog({
         eventName: 'signup',
-        payload:  'test@gmail.com'
+        payload: {email: 'test@gmail.com'}
       });
     } catch (error) {
       console.log("error which capturing event!!",error)
