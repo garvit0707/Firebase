@@ -11,8 +11,10 @@ import { useNavigation } from '@react-navigation/native';
 import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth';
 import { SuccessToast,ErrorToast, WarningToast } from './utils/Toast';
 import { EventLog } from './Eventlog/EventLog';
+import  crashlytics  from '@react-native-firebase/crashlytics';
 
 
+// crashlytics().crash()
 const LoginScreen = () => {
   const [email,setEmail] = useState("");
   const [Password,setPassword] = useState("");
