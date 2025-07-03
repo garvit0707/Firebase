@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import PhoneSignIn from './PhoneSignIn';
 import { EventLog } from './Eventlog/EventLog';
 import  crashlytics  from '@react-native-firebase/crashlytics';
+import PdfViewer from './pdfViewer/PdfViewer';
 
 // crashlytics().crash();
 const FireBase = () => {
@@ -59,6 +60,9 @@ const FireBase = () => {
         title = "kuch bhi"
         onPress={handlekuchbhi}
       />
+      <View style={{marginTop:20,borderWidth:2,borderColor:"black"}}>
+        <PdfViewer/>
+      </View>
     </View>
   );
 };
@@ -81,7 +85,7 @@ const Style = StyleSheet.create({
     // borderWidth:3,
     // borderColor:"red",
     // flexDirection:"column",
-    flex: 1,
+    // flex: 1,
     // justifyContent:"space-around"
   },
 });

@@ -6,6 +6,7 @@ import SignUpScreen from '../SignUpScreen';
 import LoginScreen from '../LoginScreen';
 import FireBase from '../FireBase';
 import HomeDashboardScreen from '../HomeDashboardScreen';
+import PdfViewer from '../pdfViewer/PdfViewer';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const Navigation = () => {
             <Stack.Screen name = "homedashboard" component={HomeDashboardScreen}/>
             <Stack.Screen name = "login" component={LoginScreen}/>
             <Stack.Screen name='signup' component={SignUpScreen}/>
+            <Stack.Screen name='pdf' component={PdfViewer}/>
         </Stack.Navigator>
     </NavigationContainer>
   )
