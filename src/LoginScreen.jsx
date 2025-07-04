@@ -12,6 +12,8 @@ import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth
 import { SuccessToast,ErrorToast, WarningToast } from './utils/Toast';
 import { EventLog } from './Eventlog/EventLog';
 import  crashlytics  from '@react-native-firebase/crashlytics';
+import { saveNamePass } from './store/Slices/UserSlices';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 // crashlytics().crash()
@@ -20,8 +22,11 @@ const LoginScreen = () => {
   const [Password,setPassword] = useState("");
   const [userdetail,setUserDetail] = useState("");
   const navigation = useNavigation();
-  
-  console.log("the user login value is here!!!",userdetail)
+  const dispatch = useDispatch();
+  const user = useSelector((value)=>value.User.userdetailss);
+
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!1",user)
+  // console.log("the user login value is here!!!",userdetail)
   const handleLogin=()=>{
     try{
       EventLog({
@@ -36,6 +41,8 @@ const LoginScreen = () => {
       .then((Response) => {
         console.log('Congrats you signed in!',(Response?.user?.providerData));
         setUserDetail(Response?.user)
+        console.log("user details before sending is @@@@@@@@@@@@@@@@@@@@----------->>>>>>>>>>>>",Response?.user._user.providerData[0])
+        dispatch(saveNamePass(Response?.user._user.providerData[0]))
         if (Response?.user?.uid){
           SuccessToast("Logged in Successfully!!")
           setTimeout(() => {
@@ -84,8 +91,15 @@ const LoginScreen = () => {
             <Text style={{ color: pressed ? 'blue' : 'black',fontWeight:"700" }}>Sign up</Text>
           )}
         </Pressable>
+
       </View>
-    </View>
+        <View style ={{borderWidth:0.8,borderColor:"black",borderRadius: 25,marginTop:20,padding:10,marginHorizontal:25}}>
+          <Text>Hey,Developer I wanno show you the user details below!!</Text>
+          <Text>NAME: {user?.name}</Text>
+          <Text>Address: {user?.address}</Text>
+          <Text>Email: {user?.email}</Text>
+        </View>
+    </View> 
   );
 };
 export default LoginScreen;
