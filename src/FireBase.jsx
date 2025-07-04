@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity,Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PhoneSignIn from './PhoneSignIn';
 import { EventLog } from './Eventlog/EventLog';
 import  crashlytics  from '@react-native-firebase/crashlytics';
 import PdfViewer from './pdfViewer/PdfViewer';
+import { useDispatch,useSelector } from 'react-redux';
+import { Value } from 'react-native/types_generated/Libraries/Animated/AnimatedExports';
+import { increment,decrement } from './store/Slices/CounterSlice';
+import { incrementByAmount } from './store/Slices/CounterSlice';
+import { saveNamePass } from './store/Slices/UserSlices';
 
 // crashlytics().crash();
 const FireBase = () => {
+  const dispatch = useDispatch();
+  const selector = useSelector((val)=>console.log(val.counter.value));
+  console.log(selector)
   const navigation = useNavigation();
   useEffect(() => {
     console.log('this is in picture');
@@ -40,6 +48,18 @@ const FireBase = () => {
     navigation.navigate('login');
   };
 
+  const handleIncrement=()=>{
+    dispatch(increment())
+  }
+
+  const handleDecrement=()=>{
+    dispatch(decrement())
+  }
+
+  const handleincredecre=()=>{
+    dispatch(incrementByAmount([80,50,90,10,3]))
+  };
+
   return (
     <View style={Style.container}>
       <Text style={{ color: 'black', marginTop: 20, alignSelf: 'center' }}>
@@ -61,7 +81,10 @@ const FireBase = () => {
         onPress={handlekuchbhi}
       />
       <View style={{marginTop:20,borderWidth:2,borderColor:"black"}}>
-        <PdfViewer/>
+        {/* <PdfViewer/> */}
+      <TouchableOpacity onPress={handleIncrement}><Text>increment the value</Text></TouchableOpacity>
+      <TouchableOpacity onPress={handleDecrement} style={{marginTop:20}}><Text>Decrement the valu</Text></TouchableOpacity>
+      <TouchableOpacity onPress={handleincredecre}><Text>press it </Text></TouchableOpacity>
       </View>
     </View>
   );

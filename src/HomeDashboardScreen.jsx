@@ -4,10 +4,16 @@ import { getAuth, signOut } from '@react-native-firebase/auth';
 import { SuccessToast } from './utils/Toast';
 import { useNavigation } from '@react-navigation/native';
 import { EventLog } from './Eventlog/EventLog';
+import { useSelector } from 'react-redux';
 
 const HomeDashboardScreen = () => {
     const [signColor,SetSignColor] = useState("")
     const navigation =  useNavigation()
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+    const selector =  useSelector((user)=>user?.User?.userval)
+
+    console.log("selector getting",selector)
     useEffect(()=>{
         try {
             EventLog({eventName: "homescreen",payload: {data:"homedata",id: "uniqur_id"}})
@@ -34,6 +40,8 @@ const HomeDashboardScreen = () => {
     }
   return (
     <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+        <Text>Hello {selector.displayName}</Text>
+        <Text>user email is {selector?.email}</Text>
         <Text>This is the home screen</Text>
         <View style = {{justifyContent:"center",flexDirection:"row",gap:10}}>
             <Text>Want to sign out</Text>
