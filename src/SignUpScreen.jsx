@@ -16,6 +16,8 @@ import {
 import { SuccessToast, ErrorToast, WarningToast } from './utils/Toast';
 import { useDispatch } from 'react-redux';
 import { saveuserdetail } from './store/Slices/UserSlices';
+import { setItem } from './utils/AsyncStorage';
+import { storeData } from './utils/AsyncStorage';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -23,9 +25,19 @@ const SignUpScreen = () => {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+  let obj = {
+    name: name,
+    address: address,
+    password: password,
+    email: email
+  }
 
+  // let obj = {
+  //   name,address,password,email
+  // }
   const handleSignup = () => {
+    storeData("usercreddd",obj)
     dispatch(saveuserdetail({name,address,email,password}))
     createUserWithEmailAndPassword(getAuth(), email, password,name,address)
       .then(Response => {
