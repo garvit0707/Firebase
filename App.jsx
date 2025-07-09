@@ -6,44 +6,14 @@ import Navigation from './src/Navigator/Navigation';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { store } from './src/store/Store';
 import { Provider } from 'react-redux';
+import { setupFirebaseNotifications } from './src/setupFirebaseNotifications ';
+
 
 const App = () => {
-  const requestUserPermission = async () => {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+useEffect(() => {
+    setupFirebaseNotifications();
+  }, []); 
 
-    if (enabled) {
-      console.log('Authorization status:', authStatus);
-      getFcmToken();
-    }
-  };
-
-  const getFcmToken = async () => {
-    const token = await messaging().getToken();
-    console.log('FCM Token: ', token);
-  };
-
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-      );
-    }
-    requestUserPermission();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert(
-        'New Notification',
-        JSON.stringify(remoteMessage.notification),
-      );
-    });
-
-    return unsubscribe;
-  }, []);
 
   return (
     <Provider store={store}>
